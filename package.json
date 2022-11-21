@@ -1,15 +1,27 @@
 {
-  "name": "week7-challenge-isdi-coders",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "prettier": {
-  "singleQuote": true
-},
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "name": "week7-challenge-isdi-coders",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prepare": "husky install"
+    },
+    "prettier": {
+        "singleQuote": true
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.43.0",
+        "eslint": "^8.28.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-config-standard-with-typescript": "^23.0.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-n": "^15.5.1",
+        "eslint-plugin-promise": "^6.1.1",
+        "husky": "^8.0.2",
+        "typescript": "^4.9.3"
+    }
 }
