@@ -1,6 +1,5 @@
 import { Personaje } from './Personaje.js';
 export class Escudero extends Personaje {
-    
     constructor(
         char_name: string,
         char_fam: string,
@@ -11,8 +10,7 @@ export class Escudero extends Personaje {
         public fidelity: number
     ) {
         super(char_name, char_fam, char_age, isAlive, img);
-        this.message='Soy un loser';
+        this.message = 'Soy un loser';
         this.emoji = '🛡';
-
     }
 }

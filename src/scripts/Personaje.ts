@@ -1,3 +1,4 @@
+import { personajes } from './personajes.js';
 export class Personaje {
     constructor(
         public char_name: string,
@@ -11,6 +12,7 @@ export class Personaje {
     ) {}
     death() {
         this.isAlive = false;
+        console.log(personajes);
     }
     comunicate() {
         console.log(this.message);

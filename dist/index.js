@@ -6,7 +6,11 @@ import { Escudero } from './scripts/Escudero.js';
 (() => {
     document.addEventListener('DOMContentLoaded', () => {
         //  const templates = [headerTemplate, footerTemplate];
-        const characterTemplate = personajes.map((item) => {
+        const characterTemplate = personajes
+            .map((item) => {
+            function kill() {
+                console.log(personajes);
+            }
             return `
                 <li class="character col">
                     <div class="card character__card">
@@ -53,25 +57,27 @@ import { Escudero } from './scripts/Escudero.js';
                                     <li>${item.message}</li>
                                 </ul>
                                 <div class="character__actions">
+                                <button onclick=${kill}() class="character__action btn">
+                                        muere
+                                    </button>
+
                                     <button class="character__action btn">
                                         habla
                                     </button>
-                                    <button class="character__action btn">
-                                        muere
-                                    </button>
+                                    
                                 </div>
                             </div>
                         </div>
                         <i class="emoji">${item.emoji}</i>
                     </div>
-                 </li>
-                    `;
-        }).join('');
+                    </li>
+                `;
+        })
+            .join('');
         const renderedHtmlString = `<ul class="characters-list row list-unstyled">
-               ${characterTemplate}
-                   
+            ${characterTemplate}    
             </ul>
-       `;
+        `;
         // RENDER HTML
         const slots = document.querySelector('slot');
         if (!slots)
