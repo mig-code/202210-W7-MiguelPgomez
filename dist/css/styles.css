@@ -8,6 +8,7 @@ body {
     min-height: 100vh;
     align-items: center;
 }
+
 .character {
     width: 20%;
     flex-basis: auto;
