@@ -1,7 +1,7 @@
 import { personajes } from './scripts/personajes.js';
+import { Rey } from './scripts/Rey.js';
+import { Luchador } from './scripts/Luchador.js';
 (() => {
-    console.log('Hello World');
-
     document.addEventListener('DOMContentLoaded', () => {
         //  const templates = [headerTemplate, footerTemplate];
 
@@ -20,22 +20,37 @@ import { personajes } from './scripts/personajes.js';
                             </h2>
                             <div class="character__info">
                                 <ul class="list-unstyled">
-                                    <li>Edad: X años</li>
+                                    <li>Edad: ${item.char_age} años</li>
                                     <li>
                                         Estado:
-                                        <i class="fas fa-thumbs-down"></i>
-                                        <i class="fas fa-thumbs-up"></i>
+                                        ${
+                                            item.isAlive
+                                                ? ' <i class="fas fa-thumbs-up"></i>'
+                                                : '<i class="fas fa-thumbs-down"></i>'
+                                        }
+                                       
+                                        
                                     </li>
                                 </ul>
                             </div>
                             <div class="character__overlay">
                                 <ul class="list-unstyled">
-                                    <li>Años de reinado: X</li>
-                                    <li>Arma: XXX</li>
-                                    <li>Destreza: X</li>
+                                
+                                ${
+                                    item instanceof Rey
+                                        ? `<li>Años de reinado: ${item.regnalYears}</li>`
+                                        : ''
+                                }
+                                ${
+                                    item instanceof Luchador
+                                        ? `<li>Arma: ${item.weapon}</li>
+                                        <li>Destreza: ${item.skill}</li>`
+                                        : ''
+                                }
                                     <li>Peloteo: X</li>
                                     <li>Asesora a: X</li>
                                     <li>Sirve a: X</li>
+                                    <li>${item.message}</li>
                                 </ul>
                                 <div class="character__actions">
                                     <button class="character__action btn">
