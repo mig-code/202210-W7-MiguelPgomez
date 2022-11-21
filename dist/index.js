@@ -1,6 +1,8 @@
 import { personajes } from './scripts/personajes.js';
 import { Rey } from './scripts/Rey.js';
 import { Luchador } from './scripts/Luchador.js';
+import { Asesor } from './scripts/Asesor.js';
+import { Escudero } from './scripts/Escudero.js';
 (() => {
     document.addEventListener('DOMContentLoaded', () => {
         //  const templates = [headerTemplate, footerTemplate];
@@ -40,9 +42,14 @@ import { Luchador } from './scripts/Luchador.js';
                 ? `<li>Arma: ${item.weapon}</li>
                                         <li>Destreza: ${item.skill}</li>`
                 : ''}
-                                    <li>Peloteo: X</li>
-                                    <li>Asesora a: X</li>
-                                    <li>Sirve a: X</li>
+                                ${item instanceof Asesor
+                ? `<li>Asesora a: ${item.advises}</li>`
+                : ''}
+                                ${item instanceof Escudero
+                ? `<li>Sirve a: ${item.serve}</li>
+                                        <li>Peloteo: ${item.fidelity}</li>`
+                : ''}
+
                                     <li>${item.message}</li>
                                 </ul>
                                 <div class="character__actions">
@@ -55,13 +62,13 @@ import { Luchador } from './scripts/Luchador.js';
                                 </div>
                             </div>
                         </div>
-                        <i class="emoji"></i>
+                        <i class="emoji">${item.emoji}</i>
                     </div>
                  </li>
                     `;
-        });
+        }).join('');
         const renderedHtmlString = `<ul class="characters-list row list-unstyled">
-               ${characterTemplate}}
+               ${characterTemplate}
                    
             </ul>
        `;

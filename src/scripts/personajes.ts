@@ -1,6 +1,8 @@
 
 import { Rey } from './Rey.js';
 import { Luchador } from './Luchador.js';
+import { Asesor } from './Asesor.js';
+import { Escudero } from './Escudero.js';
 
 const joffreyBaratheon = new Rey(
     'Joffrey',
@@ -28,8 +30,27 @@ const daenerysTargaryen = new Luchador(
     'Dragón',
     10
 );
+const tyrionLannister = new Asesor(
+    'Tyrion',
+    'Lannister',
+    39,
+    true,
+    'img/tyrion.jpg',
+    'Daenerys'
+);
+const bronn = new Escudero(
+    'Bronn',
+    '',
+    42,
+    true,
+    'img/bronn.jpg',
+    'Jaime',
+    10
+);
 
-export const personajes = [joffreyBaratheon, jaimeLannister, daenerysTargaryen];
+
+
+export const personajes = [joffreyBaratheon, jaimeLannister, daenerysTargaryen, tyrionLannister, bronn];
 console.log(personajes);
 
 // Joffrey Baratheon (rey),

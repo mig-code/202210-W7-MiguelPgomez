@@ -6,7 +6,8 @@ export class Personaje {
         public isAlive: boolean = true,
         public img: string,
         public message: string = '',
-        public tvShow: string = 'Game of Thrones'
+        public tvShow: string = 'Game of Thrones',
+        public emoji: string = ''
     ) {}
     death() {
         this.isAlive = false;
