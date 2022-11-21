@@ -5,17 +5,18 @@ import { personajes } from './scripts/personajes.js';
     document.addEventListener('DOMContentLoaded', () => {
         //  const templates = [headerTemplate, footerTemplate];
 
-        const characterTemplate = `
-         <li class="character col">
-            <div class="card character__card">
+        const characterTemplate = personajes.map((item) => {
+            return `
+                <li class="character col">
+                    <div class="card character__card">
                         <img
-                            src="img/no-one.jpg"
-                            alt="Nombre y familia del personaje"
+                            src="${item.img}"
+                            alt="${item.char_name} ${item.char_fam}"
                             class="character__picture card-img-top"
                         />
                         <div class="card-body">
                             <h2 class="character__name card-title h4">
-                                Nombre y familia
+                                ${item.char_name} ${item.char_fam}
                             </h2>
                             <div class="character__info">
                                 <ul class="list-unstyled">
@@ -48,11 +49,12 @@ import { personajes } from './scripts/personajes.js';
                         </div>
                         <i class="emoji"></i>
                     </div>
-                 </li>`;
+                 </li>
+                    `;
+        });
         const renderedHtmlString = `<ul class="characters-list row list-unstyled">
-               
-                   ${personajes.map(() => characterTemplate).join('')}
-               
+               ${characterTemplate}}
+                   
             </ul>
        `;
 
