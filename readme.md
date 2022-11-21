@@ -1,4 +1,4 @@
-# Week 7 - Challenge 
+# Week 7 - Challenge
 
 # GoT DOM
 
