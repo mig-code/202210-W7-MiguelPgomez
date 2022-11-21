@@ -6,6 +6,8 @@
     "type": "module",
     "scripts": {
         "test": "jest --watchAll --coverage",
+        "test:prod": "jest --watchAll --coverage --watchAll=false --passWithNoTests",
+        "lint": "eslint .",
         "prepare": "husky install",
         "build": "tsc",
         "start": "tsc --watch"

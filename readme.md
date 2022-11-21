@@ -1,5 +1,7 @@
 # Week 7 - Challenge
 
+Deploy : https://202210-w7-miguelpgomez.netlify.app/
+
 # GoT DOM
 
 Tendrás que programar un interfaz de usuario para que refleje el siguiente modelo de datos.
