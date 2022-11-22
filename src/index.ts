@@ -3,17 +3,23 @@ import { Rey } from './classes/Rey.js';
 import { Luchador } from './classes/Luchador.js';
 import { Asesor } from './classes/Asesor.js';
 import { Escudero } from './classes/Escudero.js';
+import { Personaje } from './classes/Personaje.js';
 
 //EVENT HANDLERS
 
 function handleClickDeath(event: Event) {
-    personajes[event.target.value].death();
+    //https://stackoverflow.com/questions/44321326/property-value-does-not-exist-on-type-eventtarget-in-typescript
+
+    const character = (event.target as HTMLInputElement).value;
+    const characterIndex = parseInt(character);
+    personajes[characterIndex].death();
+
     RenderCharactersContainer();
 }
-function handleClickSpeak(event: any) {
-    console.log('click speak');
-    const character = personajes[event.target.value];
-    renderComunications(character);
+function handleClickSpeak(event: Event) {
+    const character = (event.target as HTMLInputElement).value;
+    const characterIndex = parseInt(character);
+    renderComunications(characterIndex);
     const communicationsEl = document.querySelector('.comunications');
     if (communicationsEl) {
         communicationsEl.classList.add('comunications--on');
@@ -34,7 +40,7 @@ const LayoutTemplate = `<div class="app-container">
         <div class="comunications ">
            
         </div>`;
-function createCharacterTemplate() {
+const createCharacterTemplate = () => {
     const characterTemplate = personajes
         .map((item, index) => {
             return `
@@ -130,9 +136,9 @@ function createCharacterTemplate() {
     
         `;
     return renderedHtmlString;
-}
+};
 
-function comunicationsTemplate(char: any) {
+const comunicationsTemplate = (char: Personaje) => {
     const renderedHtmlString = ` 
             <p class="comunications__text display-1">
                 ${char.message}
@@ -144,7 +150,7 @@ function comunicationsTemplate(char: any) {
             />
         `;
     return renderedHtmlString;
-}
+};
 
 // ADD LISTENERS FUNCTIONS
 

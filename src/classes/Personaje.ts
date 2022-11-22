@@ -1,3 +1,4 @@
+
 export class Personaje {
     constructor(
         public char_name: string,
