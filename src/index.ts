@@ -19,7 +19,7 @@ function handleClickDeath(event: Event) {
 function handleClickSpeak(event: Event) {
     const character = (event.target as HTMLInputElement).value;
     const characterIndex = parseInt(character);
-    renderComunications(characterIndex);
+    renderComunications(personajes[characterIndex]);
     const communicationsEl = document.querySelector('.comunications');
     if (communicationsEl) {
         communicationsEl.classList.add('comunications--on');
@@ -184,7 +184,7 @@ function RenderCharactersContainer() {
     addDeathListeners();
     addSpeakListeners();
 }
-function renderComunications(char: any) {
+function renderComunications(char: Personaje) {
     const comunicationsEl = document.querySelector('.comunications');
     if (comunicationsEl) {
         comunicationsEl.innerHTML = comunicationsTemplate(char);

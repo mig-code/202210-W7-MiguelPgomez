@@ -14,7 +14,7 @@ function handleClickDeath(event) {
 function handleClickSpeak(event) {
     const character = event.target.value;
     const characterIndex = parseInt(character);
-    renderComunications(characterIndex);
+    renderComunications(personajes[characterIndex]);
     const communicationsEl = document.querySelector('.comunications');
     if (communicationsEl) {
         communicationsEl.classList.add('comunications--on');
