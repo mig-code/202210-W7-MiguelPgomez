@@ -3,16 +3,10 @@ import { Rey } from './classes/Rey.js';
 import { Luchador } from './classes/Luchador.js';
 import { Asesor } from './classes/Asesor.js';
 import { Escudero } from './classes/Escudero.js';
+//EVENT HANDLERS
 function handleClickDeath(event) {
-    console.log('click');
-    console.log(event.target.value);
     personajes[event.target.value].death();
-    const appContainerEl = document.querySelector('.app-container');
-    if (appContainerEl) {
-        appContainerEl.innerHTML = createCharacterTemplate();
-        addDeathListeners();
-        addSpeakListeners();
-    }
+    RenderCharactersContainer();
 }
 function handleClickSpeak(event) {
     console.log('click speak');
@@ -22,14 +16,19 @@ function handleClickSpeak(event) {
     if (communicationsEl) {
         communicationsEl.classList.add('comunications--on');
     }
-    //remove the class
     setTimeout(() => {
         if (communicationsEl) {
             communicationsEl.classList.remove('comunications--on');
         }
     }, 3000);
-    addSpeakListeners();
 }
+//TEMPLATES
+const LayoutTemplate = `<div class="app-container">
+            <slot name="rendered-components"></slot>
+        </div>
+        <div class="comunications ">
+           
+        </div>`;
 function createCharacterTemplate() {
     const characterTemplate = personajes
         .map((item, index) => {
@@ -111,10 +110,8 @@ function createCharacterTemplate() {
         `;
     return renderedHtmlString;
 }
-function renderComunications(char) {
-    const comunicationsEl = document.querySelector('.comunications');
-    if (comunicationsEl) {
-        comunicationsEl.innerHTML = ` 
+function comunicationsTemplate(char) {
+    const renderedHtmlString = ` 
             <p class="comunications__text display-1">
                 ${char.message}
             </p>
@@ -124,9 +121,9 @@ function renderComunications(char) {
                 alt="${char.char_name} ${char.char_fam}"
             />
         `;
-    }
+    return renderedHtmlString;
 }
-// RENDER HTML
+// ADD LISTENERS FUNCTIONS
 function addDeathListeners() {
     const buttons = document.querySelectorAll('.character__action--death');
     buttons.forEach((button) => {
@@ -139,23 +136,27 @@ function addSpeakListeners() {
         button.addEventListener('click', handleClickSpeak);
     });
 }
-const LayoutTemplate = `<div class="app-container">
-            <slot name="rendered-components"></slot>
-        </div>
-        <div class="comunications ">
-           
-        </div>`;
+// RENDER FUCTIONS
 function RenderLayout() {
     const root = document.querySelector('slot');
     if (root) {
         root.outerHTML = LayoutTemplate;
     }
-    console.log("root", root);
+    RenderCharactersContainer();
 }
+function RenderCharactersContainer() {
+    const appContainer = document.querySelector('.app-container');
+    if (appContainer) {
+        appContainer.innerHTML = createCharacterTemplate();
+    }
+    addDeathListeners();
+    addSpeakListeners();
+}
+function renderComunications(char) {
+    const comunicationsEl = document.querySelector('.comunications');
+    if (comunicationsEl) {
+        comunicationsEl.innerHTML = comunicationsTemplate(char);
+    }
+}
+// START APP
 RenderLayout();
-const appContainer = document.querySelector('.app-container');
-if (appContainer) {
-    appContainer.innerHTML = createCharacterTemplate();
-}
-addDeathListeners();
-addSpeakListeners();

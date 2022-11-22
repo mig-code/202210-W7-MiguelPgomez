@@ -4,17 +4,11 @@ import { Luchador } from './classes/Luchador.js';
 import { Asesor } from './classes/Asesor.js';
 import { Escudero } from './classes/Escudero.js';
 
-function handleClickDeath(event: any) {
-    console.log('click');
-    console.log(event.target.value);
-    personajes[event.target.value].death();
+//EVENT HANDLERS
 
-    const appContainerEl = document.querySelector('.app-container');
-    if (appContainerEl) {
-        appContainerEl.innerHTML = createCharacterTemplate();
-        addDeathListeners();
-        addSpeakListeners();
-    }
+function handleClickDeath(event: Event) {
+    personajes[event.target.value].death();
+    RenderCharactersContainer();
 }
 function handleClickSpeak(event: any) {
     console.log('click speak');
@@ -24,15 +18,22 @@ function handleClickSpeak(event: any) {
     if (communicationsEl) {
         communicationsEl.classList.add('comunications--on');
     }
-    //remove the class
 
     setTimeout(() => {
         if (communicationsEl) {
             communicationsEl.classList.remove('comunications--on');
         }
     }, 3000);
-    addSpeakListeners();
 }
+
+//TEMPLATES
+
+const LayoutTemplate = `<div class="app-container">
+            <slot name="rendered-components"></slot>
+        </div>
+        <div class="comunications ">
+           
+        </div>`;
 function createCharacterTemplate() {
     const characterTemplate = personajes
         .map((item, index) => {
@@ -130,10 +131,9 @@ function createCharacterTemplate() {
         `;
     return renderedHtmlString;
 }
-function renderComunications(char: any) {
-    const comunicationsEl = document.querySelector('.comunications');
-    if (comunicationsEl) {
-        comunicationsEl.innerHTML = ` 
+
+function comunicationsTemplate(char: any) {
+    const renderedHtmlString = ` 
             <p class="comunications__text display-1">
                 ${char.message}
             </p>
@@ -143,10 +143,10 @@ function renderComunications(char: any) {
                 alt="${char.char_name} ${char.char_fam}"
             />
         `;
-    }
+    return renderedHtmlString;
 }
 
-// RENDER HTML
+// ADD LISTENERS FUNCTIONS
 
 function addDeathListeners() {
     const buttons = document.querySelectorAll('.character__action--death');
@@ -161,25 +161,29 @@ function addSpeakListeners() {
     });
 }
 
-const LayoutTemplate = `<div class="app-container">
-            <slot name="rendered-components"></slot>
-        </div>
-        <div class="comunications ">
-           
-        </div>`;
-
+// RENDER FUCTIONS
 function RenderLayout() {
     const root = document.querySelector('slot');
     if (root) {
         root.outerHTML = LayoutTemplate;
     }
-    console.log("root", root);
+    RenderCharactersContainer();
 }
-RenderLayout();
 
-const appContainer = document.querySelector('.app-container');
-if (appContainer) {
-    appContainer.innerHTML = createCharacterTemplate();
+function RenderCharactersContainer() {
+    const appContainer = document.querySelector('.app-container');
+    if (appContainer) {
+        appContainer.innerHTML = createCharacterTemplate();
+    }
+    addDeathListeners();
+    addSpeakListeners();
 }
-addDeathListeners();
-addSpeakListeners();
+function renderComunications(char: any) {
+    const comunicationsEl = document.querySelector('.comunications');
+    if (comunicationsEl) {
+        comunicationsEl.innerHTML = comunicationsTemplate(char);
+    }
+}
+
+// START APP
+RenderLayout();
