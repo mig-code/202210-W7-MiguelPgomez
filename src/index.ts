@@ -3,22 +3,52 @@ import { Rey } from './scripts/Rey.js';
 import { Luchador } from './scripts/Luchador.js';
 import { Asesor } from './scripts/Asesor.js';
 import { Escudero } from './scripts/Escudero.js';
-(() => {
-    document.addEventListener('DOMContentLoaded', () => {
-        //  const templates = [headerTemplate, footerTemplate];
 
-        const characterTemplate = personajes
-            .map((item) => {
-                function kill() {
-                    console.log(personajes);
-                }
-                return `
+function handleClickDeath(event: any) {
+    console.log('click');
+    console.log(event.target.value);
+    personajes[event.target.value].death();
+
+    const appContainerEl = document.querySelector('.app-container');
+    if (appContainerEl) {
+        appContainerEl.innerHTML = createCharacterTemplate();
+        addDeathListeners();
+        addSpeakListeners();
+    }
+}
+function handleClickSpeak(event: any) {
+    console.log('click speak');
+    const character = personajes[event.target.value];
+    renderComunications(character);
+    const communicationsEl = document.querySelector('.comunications');
+    if (communicationsEl) {
+        communicationsEl.classList.add('comunications--on');
+    }
+    //remove the class
+
+    setTimeout(() => {
+        if (communicationsEl) {
+            communicationsEl.classList.remove('comunications--on');
+        }
+    }, 3000);
+    addSpeakListeners();
+}
+function createCharacterTemplate() {
+    const characterTemplate = personajes
+        .map((item, index) => {
+            return `
                 <li class="character col">
                     <div class="card character__card">
                         <img
                             src="${item.img}"
                             alt="${item.char_name} ${item.char_fam}"
-                            class="character__picture card-img-top"
+                            class="character__picture card-img-top
+                                ${
+                                    !item.isAlive
+                                        ? 'character__picture--death'
+                                        : ''
+                                }
+                            "
                         />
                         <div class="card-body">
                             <h2 class="character__name card-title h4">
@@ -50,7 +80,7 @@ import { Escudero } from './scripts/Escudero.js';
                                 ${
                                     item instanceof Luchador
                                         ? `<li>Arma: ${item.weapon}</li>
-                                        <li>Destreza: ${item.skill}</li>`
+                                    <li>Destreza: ${item.skill}</li>`
                                         : ''
                                 }
                                 ${
@@ -68,31 +98,68 @@ import { Escudero } from './scripts/Escudero.js';
                                     <li>${item.message}</li>
                                 </ul>
                                 <div class="character__actions">
-                                <button onclick=${kill}() class="character__action btn">
-                                        muere
-                                    </button>
-
-                                    <button class="character__action btn">
-                                        habla
-                                    </button>
-                                    
-                                </div>
+                                ${
+                                    item.isAlive
+                                        ? ` <button  class="character__action character__action--death btn" value=${index}>
+                                        Muere
+                                            </button>`
+                                        : ``
+                                }
+                                ${
+                                    item.isAlive
+                                        ? ` <button class="character__action character__action--speak btn" value=${index}>
+                                        Habla
+                                            </button>`
+                                        : ``
+                                }
+             
+                            </div>
                             </div>
                         </div>
                         <i class="emoji">${item.emoji}</i>
                     </div>
                     </li>
                 `;
-            })
-            .join('');
-        const renderedHtmlString = `<ul class="characters-list row list-unstyled">
+        })
+        .join('');
+    const renderedHtmlString = `<ul class="characters-list row list-unstyled">
             ${characterTemplate}    
             </ul>
         `;
+    return renderedHtmlString;
+}
+function renderComunications(char: any) {
+    const comunicationsEl = document.querySelector('.comunications');
+    if (comunicationsEl) {
+        comunicationsEl.innerHTML = ` 
+            <p class="comunications__text display-1">
+                ${char.message}
+            </p>
+            <img
+                class="comunications__picture"
+                src="${char.img}"
+                alt="${char.char_name} ${char.char_fam}"
+            />
+        `;
+    }
+}
 
-        // RENDER HTML
-        const slots = document.querySelector('slot');
-        if (!slots) return;
-        slots.outerHTML = renderedHtmlString;
+// RENDER HTML
+const slots = document.querySelector('slot');
+if (slots) {
+    slots.outerHTML = createCharacterTemplate();
+}
+addDeathListeners();
+addSpeakListeners();
+function addDeathListeners() {
+    const buttons = document.querySelectorAll('.character__action--death');
+    buttons.forEach((button) => {
+        button.addEventListener('click', handleClickDeath);
     });
-})();
+}
+function addSpeakListeners() {
+    const buttons = document.querySelectorAll('.character__action--speak');
+    buttons.forEach((button) => {
+        button.addEventListener('click', handleClickSpeak);
+    });
+}
