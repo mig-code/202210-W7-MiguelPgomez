@@ -3,16 +3,24 @@ import { Rey } from './scripts/Rey.js';
 import { Luchador } from './scripts/Luchador.js';
 import { Asesor } from './scripts/Asesor.js';
 import { Escudero } from './scripts/Escudero.js';
-(() => {
-    document.addEventListener('DOMContentLoaded', () => {
-        //  const templates = [headerTemplate, footerTemplate];
 
-        const characterTemplate = personajes
-            .map((item) => {
-                function kill() {
-                    console.log(personajes);
-                }
-                return `
+//  const templates = [headerTemplate, footerTemplate];
+
+function handleClick(event) {
+    console.log('click');
+    console.log(event.target.value);
+    personajes[event.target.value].death();
+
+    const appContainerEl = document.querySelector('.app-container');
+    if (appContainerEl) {
+        appContainerEl.innerHTML = createCharacterTemplate();
+        addButtons();
+    }
+}
+function createCharacterTemplate() {
+    const characterTemplate = personajes
+        .map((item, index) => {
+            return `
                 <li class="character col">
                     <div class="card character__card">
                         <img
@@ -68,7 +76,7 @@ import { Escudero } from './scripts/Escudero.js';
                                     <li>${item.message}</li>
                                 </ul>
                                 <div class="character__actions">
-                                <button onclick=${kill}() class="character__action btn">
+                                <button  class="character__action btn" value=${index}>
                                         muere
                                     </button>
 
@@ -83,16 +91,24 @@ import { Escudero } from './scripts/Escudero.js';
                     </div>
                     </li>
                 `;
-            })
-            .join('');
-        const renderedHtmlString = `<ul class="characters-list row list-unstyled">
+        })
+        .join('');
+    const renderedHtmlString = `<ul class="characters-list row list-unstyled">
             ${characterTemplate}    
             </ul>
         `;
+    return renderedHtmlString;
+}
 
-        // RENDER HTML
-        const slots = document.querySelector('slot');
-        if (!slots) return;
-        slots.outerHTML = renderedHtmlString;
+// RENDER HTML
+const slots = document.querySelector('slot');
+if (slots) {
+    slots.outerHTML = createCharacterTemplate();
+}
+addButtons();
+function addButtons() {
+    const buttons = document.querySelectorAll('.character__action');
+    buttons.forEach((button) => {
+        button.addEventListener('click', handleClick);
     });
-})();
+}
