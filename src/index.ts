@@ -122,9 +122,11 @@ function createCharacterTemplate() {
                 `;
         })
         .join('');
-    const renderedHtmlString = `<ul class="characters-list row list-unstyled">
+    const renderedHtmlString = `
+    <ul class="characters-list row list-unstyled">
             ${characterTemplate}    
             </ul>
+    
         `;
     return renderedHtmlString;
 }
@@ -145,12 +147,7 @@ function renderComunications(char: any) {
 }
 
 // RENDER HTML
-const slots = document.querySelector('slot');
-if (slots) {
-    slots.outerHTML = createCharacterTemplate();
-}
-addDeathListeners();
-addSpeakListeners();
+
 function addDeathListeners() {
     const buttons = document.querySelectorAll('.character__action--death');
     buttons.forEach((button) => {
@@ -163,3 +160,26 @@ function addSpeakListeners() {
         button.addEventListener('click', handleClickSpeak);
     });
 }
+
+const LayoutTemplate = `<div class="app-container">
+            <slot name="rendered-components"></slot>
+        </div>
+        <div class="comunications ">
+           
+        </div>`;
+
+function RenderLayout() {
+    const root = document.querySelector('slot');
+    if (root) {
+        root.outerHTML = LayoutTemplate;
+    }
+    console.log("root", root);
+}
+RenderLayout();
+
+const appContainer = document.querySelector('.app-container');
+if (appContainer) {
+    appContainer.innerHTML = createCharacterTemplate();
+}
+addDeathListeners();
+addSpeakListeners();
