@@ -43,11 +43,11 @@ function createCharacterTemplate() {
                             src="${item.img}"
                             alt="${item.char_name} ${item.char_fam}"
                             class="character__picture card-img-top
-                                 ${
-                                     !item.isAlive
-                                         ? 'character__picture--death'
-                                         : ''
-                                 }
+                                ${
+                                    !item.isAlive
+                                        ? 'character__picture--death'
+                                        : ''
+                                }
                             "
                         />
                         <div class="card-body">
@@ -80,7 +80,7 @@ function createCharacterTemplate() {
                                 ${
                                     item instanceof Luchador
                                         ? `<li>Arma: ${item.weapon}</li>
-                                        <li>Destreza: ${item.skill}</li>`
+                                    <li>Destreza: ${item.skill}</li>`
                                         : ''
                                 }
                                 ${
@@ -105,15 +105,15 @@ function createCharacterTemplate() {
                                             </button>`
                                         : ``
                                 }
-                                 ${
-                                     item.isAlive
-                                         ? ` <button class="character__action character__action--speak btn" value=${index}>
+                                ${
+                                    item.isAlive
+                                        ? ` <button class="character__action character__action--speak btn" value=${index}>
                                         Habla
                                             </button>`
-                                         : ``
-                                 }
+                                        : ``
+                                }
              
-                                </div>
+                            </div>
                             </div>
                         </div>
                         <i class="emoji">${item.emoji}</i>
@@ -133,7 +133,7 @@ function renderComunications(char: any) {
     if (comunicationsEl) {
         comunicationsEl.innerHTML = ` 
             <p class="comunications__text display-1">
-               ${char.message}
+                ${char.message}
             </p>
             <img
                 class="comunications__picture"

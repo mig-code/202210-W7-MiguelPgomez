@@ -40,7 +40,7 @@ function createCharacterTemplate() {
                             src="${item.img}"
                             alt="${item.char_name} ${item.char_fam}"
                             class="character__picture card-img-top
-                                 ${!item.isAlive
+                                ${!item.isAlive
             ? 'character__picture--death'
             : ''}
                             "
@@ -70,7 +70,7 @@ function createCharacterTemplate() {
             : ''}
                                 ${item instanceof Luchador
             ? `<li>Arma: ${item.weapon}</li>
-                                        <li>Destreza: ${item.skill}</li>`
+                                    <li>Destreza: ${item.skill}</li>`
             : ''}
                                 ${item instanceof Asesor
             ? `<li>Asesora a: ${item.advises}</li>`
@@ -88,13 +88,13 @@ function createCharacterTemplate() {
                                         Muere
                                             </button>`
             : ``}
-                                 ${item.isAlive
+                                ${item.isAlive
             ? ` <button class="character__action character__action--speak btn" value=${index}>
                                         Habla
                                             </button>`
             : ``}
              
-                                </div>
+                            </div>
                             </div>
                         </div>
                         <i class="emoji">${item.emoji}</i>
@@ -114,7 +114,7 @@ function renderComunications(char) {
     if (comunicationsEl) {
         comunicationsEl.innerHTML = ` 
             <p class="comunications__text display-1">
-               ${char.message}
+                ${char.message}
             </p>
             <img
                 class="comunications__picture"
