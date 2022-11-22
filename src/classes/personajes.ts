@@ -46,10 +46,3 @@ export const personajes = [
     tyrionLannister,
     bronn,
 ];
-console.log(personajes);
-
-// Joffrey Baratheon (rey),
-// Jaime Lannister (luchador),
-// Daenerys Targaryen (luchadora),
-// Tyrion Lannister (asesor de Daenerys) y
-// Bronn (escudero de Jaime).)

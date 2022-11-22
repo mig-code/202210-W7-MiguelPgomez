@@ -1,8 +1,8 @@
-import { personajes } from './scripts/personajes.js';
-import { Rey } from './scripts/Rey.js';
-import { Luchador } from './scripts/Luchador.js';
-import { Asesor } from './scripts/Asesor.js';
-import { Escudero } from './scripts/Escudero.js';
+import { personajes } from './classes/personajes.js';
+import { Rey } from './classes/Rey.js';
+import { Luchador } from './classes/Luchador.js';
+import { Asesor } from './classes/Asesor.js';
+import { Escudero } from './classes/Escudero.js';
 function handleClickDeath(event) {
     console.log('click');
     console.log(event.target.value);

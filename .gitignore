@@ -90,6 +90,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist/scripts
+dist/classes
 dist/extra
 # Gatsby files
 .cache/
