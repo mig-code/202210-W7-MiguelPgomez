@@ -3,16 +3,32 @@ import { Rey } from './scripts/Rey.js';
 import { Luchador } from './scripts/Luchador.js';
 import { Asesor } from './scripts/Asesor.js';
 import { Escudero } from './scripts/Escudero.js';
-//  const templates = [headerTemplate, footerTemplate];
-function handleClick(event) {
+function handleClickDeath(event) {
     console.log('click');
     console.log(event.target.value);
     personajes[event.target.value].death();
     const appContainerEl = document.querySelector('.app-container');
     if (appContainerEl) {
         appContainerEl.innerHTML = createCharacterTemplate();
-        addButtons();
+        addDeathListeners();
+        addSpeakListeners();
     }
+}
+function handleClickSpeak(event) {
+    console.log('click speak');
+    const character = personajes[event.target.value];
+    renderComunications(character);
+    const communicationsEl = document.querySelector('.comunications');
+    if (communicationsEl) {
+        communicationsEl.classList.add('comunications--on');
+    }
+    //remove the class
+    setTimeout(() => {
+        if (communicationsEl) {
+            communicationsEl.classList.remove('comunications--on');
+        }
+    }, 3000);
+    addSpeakListeners();
 }
 function createCharacterTemplate() {
     const characterTemplate = personajes
@@ -23,7 +39,11 @@ function createCharacterTemplate() {
                         <img
                             src="${item.img}"
                             alt="${item.char_name} ${item.char_fam}"
-                            class="character__picture card-img-top"
+                            class="character__picture card-img-top
+                                 ${!item.isAlive
+            ? 'character__picture--death'
+            : ''}
+                            "
                         />
                         <div class="card-body">
                             <h2 class="character__name card-title h4">
@@ -63,14 +83,17 @@ function createCharacterTemplate() {
                                     <li>${item.message}</li>
                                 </ul>
                                 <div class="character__actions">
-                                <button  class="character__action btn" value=${index}>
-                                        muere
-                                    </button>
-
-                                    <button class="character__action btn">
-                                        habla
-                                    </button>
-                                    
+                                ${item.isAlive
+            ? ` <button  class="character__action character__action--death btn" value=${index}>
+                                        Muere
+                                            </button>`
+            : ``}
+                                 ${item.isAlive
+            ? ` <button class="character__action character__action--speak btn" value=${index}>
+                                        Habla
+                                            </button>`
+            : ``}
+             
                                 </div>
                             </div>
                         </div>
@@ -86,15 +109,37 @@ function createCharacterTemplate() {
         `;
     return renderedHtmlString;
 }
+function renderComunications(char) {
+    const comunicationsEl = document.querySelector('.comunications');
+    if (comunicationsEl) {
+        comunicationsEl.innerHTML = ` 
+            <p class="comunications__text display-1">
+               ${char.message}
+            </p>
+            <img
+                class="comunications__picture"
+                src="${char.img}"
+                alt="${char.char_name} ${char.char_fam}"
+            />
+        `;
+    }
+}
 // RENDER HTML
 const slots = document.querySelector('slot');
 if (slots) {
     slots.outerHTML = createCharacterTemplate();
 }
-addButtons();
-function addButtons() {
-    const buttons = document.querySelectorAll('.character__action');
+addDeathListeners();
+addSpeakListeners();
+function addDeathListeners() {
+    const buttons = document.querySelectorAll('.character__action--death');
     buttons.forEach((button) => {
-        button.addEventListener('click', handleClick);
+        button.addEventListener('click', handleClickDeath);
+    });
+}
+function addSpeakListeners() {
+    const buttons = document.querySelectorAll('.character__action--speak');
+    buttons.forEach((button) => {
+        button.addEventListener('click', handleClickSpeak);
     });
 }
