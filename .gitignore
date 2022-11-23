@@ -91,6 +91,8 @@ out
 .nuxt
 dist/scripts
 dist/classes
+dist/*.js
+
 dist/extra
 # Gatsby files
 .cache/
