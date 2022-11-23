@@ -4,12 +4,12 @@ export class Rey extends Personaje {
         char_name: string,
         char_fam: string,
         char_age: number,
-        isAlive: boolean,
+       
         img: string,
 
         public regnalYears: number
     ) {
-        super(char_name, char_fam, char_age, isAlive, img);
+        super(char_name, char_fam, char_age, img);
         this.message = 'Vais a morir todos';
         this.emoji = '👑';
     }
