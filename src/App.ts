@@ -14,7 +14,7 @@ const handleClickDeath = (event: Event) => {
     const characterIndex: number = parseInt(character);
     personajes[characterIndex].death();
 
-    RenderCharactersContainer();
+    renderCharactersContainer();
 };
 const handleClickSpeak = (event: Event) => {
     const character = (event.target as HTMLInputElement).value;
@@ -167,15 +167,15 @@ function addSpeakListeners() {
 }
 
 // RENDER FUCTIONS
-export function RenderLayout() {
+export function renderLayout() {
     const root = document.querySelector('slot');
     if (root) {
         root.outerHTML = LayoutTemplate;
     }
-    RenderCharactersContainer();
+    renderCharactersContainer();
 }
 
-function RenderCharactersContainer() {
+function renderCharactersContainer() {
     const appContainer = document.querySelector('.app');
     if (appContainer) {
         appContainer.innerHTML = charactersContainerTemplate();

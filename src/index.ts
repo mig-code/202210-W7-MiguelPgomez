@@ -1,3 +1,3 @@
 // START APP
-import { RenderLayout } from './app.js';
-RenderLayout();
+import { renderLayout } from 'app.js';
+renderLayout();

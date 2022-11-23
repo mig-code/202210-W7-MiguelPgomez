@@ -9,7 +9,7 @@ const handleClickDeath = (event) => {
     const character = event.target.value;
     const characterIndex = parseInt(character);
     personajes[characterIndex].death();
-    RenderCharactersContainer();
+    renderCharactersContainer();
 };
 const handleClickSpeak = (event) => {
     const character = event.target.value;
@@ -138,14 +138,14 @@ function addSpeakListeners() {
     });
 }
 // RENDER FUCTIONS
-export function RenderLayout() {
+export function renderLayout() {
     const root = document.querySelector('slot');
     if (root) {
         root.outerHTML = LayoutTemplate;
     }
-    RenderCharactersContainer();
+    renderCharactersContainer();
 }
-function RenderCharactersContainer() {
+function renderCharactersContainer() {
     const appContainer = document.querySelector('.app');
     if (appContainer) {
         appContainer.innerHTML = charactersContainerTemplate();
