@@ -8,7 +8,7 @@ Tendrás que programar un interfaz de usuario para que refleje el siguiente mode
 
 En Juego de Tronos existen personajes. Todos esos personajes tienen la siguiente información: · Nombre · Familia a la que pertenece · Edad · Estado (vivo o muerto, aunque inicialmente todos están vivos)
 
-Todos los personajes pueden realizar la acción de comunicar, pero cada tipo de personaje (no cada personaje) se comunica de un modo distinto. ❌Nota: este método devuelve el string con la frase, no imprime por consola.
+Todos los personajes pueden realizar la acción de comunicar, pero cada tipo de personaje (no cada personaje) se comunica de un modo distinto. ✔️Nota: este método devuelve el string con la frase, no imprime por consola.
 
 ✔️ Todos los personajes pueden realizar la acción de morir, cambiándose su estado a muerto.
 
@@ -35,10 +35,11 @@ Todos los personajes pueden realizar la acción de comunicar, pero cada tipo de 
     -   Bronn (escudero de Jaime).)
 -   ✔️ index.js (aquí va todo el resto del enunciado, y éste será el punto de entrada)
 
-1. ✔️Haz que por cada personaje del array se muestre la ficha correspondiente en el navegador:
-   ✔️ En el elemento con clase `emoji` tiene que aparecer uno de estos emojis dependiendo del tipo de personaje: 👑 🗡 🎓 🛡
-   ✔️ Si el personaje está muerto, su foto debe aparecer cabeza abajo (haz el CSS necesario);
-   ✔️ En la lista con clase `metadata`, haz que sólo aparezcan los `li` correspondientes al personaje.
+1. 
+✔️Haz que por cada personaje del array se muestre la ficha correspondiente en el navegador:
+✔️ En el elemento con clase `emoji` tiene que aparecer uno de estos emojis dependiendo del tipo de personaje: 👑 🗡 🎓 🛡
+✔️ Si el personaje está muerto, su foto debe aparecer cabeza abajo (haz el CSS necesario);
+✔️ En la lista con clase `metadata`, haz que sólo aparezcan los `li` correspondientes al personaje.
 2. ✔️ Cuando el usuario haga clic en el botón "muere", tiene que cambiar el estado del personaje, y la interfaz debe reflejar el cambio.
 3. ✔️ Cuando el usuario haga clic en el botón "habla", el elemento con clase `comunicaciones` debe aparecer con el texto y la imagen correspondientes.
-   ✔️ Haz que este elemento `comunicaciones` tenga la clase `on` durante 2 segundos y luego se le quite.
+✔️ Haz que este elemento `comunicaciones` tenga la clase `on` durante 2 segundos y luego se le quite.
