@@ -23,7 +23,7 @@ function handleClickSpeak(event) {
         if (communicationsEl) {
             communicationsEl.classList.remove('comunications--on');
         }
-    }, 3000);
+    }, 2000);
 }
 //TEMPLATES
 const LayoutTemplate = `<div class="app-container">
@@ -81,8 +81,6 @@ const createCharacterTemplate = () => {
             ? `<li>Sirve a: ${item.serve}</li>
                                         <li>Peloteo: ${item.fidelity}</li>`
             : ''}
-
-                                    <li>${item.message}</li>
                                 </ul>
                                 <div class="character__actions">
                                 ${item.isAlive
@@ -116,7 +114,7 @@ const createCharacterTemplate = () => {
 const comunicationsTemplate = (char) => {
     const renderedHtmlString = ` 
             <p class="comunications__text display-1">
-                ${char.message}
+                ${char.comunicate()}
             </p>
             <img
                 class="comunications__picture"

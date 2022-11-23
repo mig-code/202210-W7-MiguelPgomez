@@ -4,12 +4,11 @@ export class Escudero extends Personaje {
         char_name: string,
         char_fam: string,
         char_age: number,
-        isAlive: boolean,
         img: string,
         public serve: string,
         public fidelity: number
     ) {
-        super(char_name, char_fam, char_age, isAlive, img);
+        super(char_name, char_fam, char_age, img);
         this.message = 'Soy un loser';
         this.emoji = '🛡';
     }
