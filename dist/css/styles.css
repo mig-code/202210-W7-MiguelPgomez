@@ -87,7 +87,7 @@ body {
 .comunications--on {
     right: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.186);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .comunications__picture {
@@ -97,12 +97,7 @@ body {
     bottom: 10px;
     object-fit: cover;
 }
-.comunications__text {
-    position: absolute;
-    bottom: 100px;
-    right: 10px;
-    font-size: 2rem;
-}
+
 .emoji {
     font-style: normal;
     position: absolute;
