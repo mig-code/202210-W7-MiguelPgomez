@@ -14,7 +14,8 @@ const handleClickDeath = (event: Event) => {
     const characterIndex: number = parseInt(character);
     personajes[characterIndex].death();
 
-    renderCharactersContainer();
+    // renderCharactersContainer();
+    renderCharacter(characterIndex);
 };
 const handleClickSpeak = (event: Event) => {
     const character = (event.target as HTMLInputElement).value;
@@ -34,18 +35,20 @@ const handleClickSpeak = (event: Event) => {
 
 //TEMPLATES
 
-const LayoutTemplate = `<div class="app container">
+const LayoutTemplate = 
+        `
+        <div class="app container">
             <slot name="rendered-components"></slot>
         </div>
-        <div class="comunications ">
-           
-        </div>`;
+        <div class="comunications "> 
+        </div>
+        `;
 const charactersContainerTemplate = () => {
-    const characterTemplate: string = personajes
+    const characterTemplate: string[] = personajes
 
         .map((item, index) => {
             return `
-                <li class="character col">
+                <li class="character col character-col${index}">
                     <div class="card character__card">
                         <img
                             src="${item.img}"
@@ -126,15 +129,9 @@ const charactersContainerTemplate = () => {
                     </div>
                     </li>
                 `;
-        })
-        .join('');
-    const renderedHtmlString = `
-    <ul class="characters-list row list-unstyled">
-            ${characterTemplate}    
-            </ul>
-    
-        `;
-    return renderedHtmlString;
+        });
+        
+    return characterTemplate;
 };
 
 const comunicationsTemplate = (char: Personaje) => {
@@ -178,7 +175,12 @@ export function renderLayout() {
 function renderCharactersContainer() {
     const appContainer = document.querySelector('.app');
     if (appContainer) {
-        appContainer.innerHTML = charactersContainerTemplate();
+        appContainer.innerHTML = 
+        `
+        <ul class="characters-list row list-unstyled">
+            ${charactersContainerTemplate().join('')}     
+        </ul>
+        `
     }
     addDeathListeners();
     addSpeakListeners();
@@ -187,5 +189,13 @@ function renderComunications(char: Personaje) {
     const comunicationsEl = document.querySelector('.comunications');
     if (comunicationsEl) {
         comunicationsEl.innerHTML = comunicationsTemplate(char);
+    }
+}
+
+function renderCharacter(char:number){
+    const characaterColEl=document.querySelector(`.character-col${char}`)
+    if(characaterColEl){
+        // 
+        characaterColEl.outerHTML=charactersContainerTemplate()[char]
     }
 }
