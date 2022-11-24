@@ -1,5 +1,5 @@
-import { Personaje } from '../classes/Personaje.js';
-export function comunicationsTemplate(char: Personaje): string {
+import { PersonajeType } from '../classes/Personaje.js';
+export function comunicationsTemplate(char: PersonajeType): string {
     const renderedHtmlString = ` 
             <p class="comunications__text display-1">
                 ${char.comunicate()}

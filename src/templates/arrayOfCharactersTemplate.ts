@@ -4,7 +4,7 @@ import { Luchador } from '../classes/Luchador.js';
 import { Asesor } from '../classes/Asesor.js';
 import { Escudero } from '../classes/Escudero.js';
 
-const charactersContainerTemplate = () => {
+export const arrayOfCharactersTemplate = () => {
     const characterTemplate: string[] = personajes.map((item, index) => {
         return `
                 <li class="character col character-col${index}">
@@ -92,5 +92,3 @@ const charactersContainerTemplate = () => {
 
     return characterTemplate;
 };
-
-export { charactersContainerTemplate };
