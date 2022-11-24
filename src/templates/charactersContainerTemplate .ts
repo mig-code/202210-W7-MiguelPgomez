@@ -1,53 +1,12 @@
-import { personajes } from './classes/personajes.js';
-import { Rey } from './classes/Rey.js';
-import { Luchador } from './classes/Luchador.js';
-import { Asesor } from './classes/Asesor.js';
-import { Escudero } from './classes/Escudero.js';
-import { Personaje } from './classes/Personaje.js';
+import { personajes } from '../helpers/personajes.js';
+import { Rey } from '../classes/Rey.js';
+import { Luchador } from '../classes/Luchador.js';
+import { Asesor } from '../classes/Asesor.js';
+import { Escudero } from '../classes/Escudero.js';
 
-//EVENT HANDLERS
-
-const handleClickDeath = (event: Event) => {
-    //https://stackoverflow.com/questions/44321326/property-value-does-not-exist-on-type-eventtarget-in-typescript
-
-    const character = (event.target as HTMLInputElement).value;
-    const characterIndex: number = parseInt(character);
-    personajes[characterIndex].death();
-
-    // renderCharactersContainer();
-    renderCharacter(characterIndex);
-};
-const handleClickSpeak = (event: Event) => {
-    const character = (event.target as HTMLInputElement).value;
-    const characterIndex = parseInt(character);
-    renderComunications(personajes[characterIndex]);
-    const communicationsEl = document.querySelector('.comunications');
-    if (communicationsEl) {
-        communicationsEl.classList.add('comunications--on');
-    }
-
-    setTimeout(() => {
-        if (communicationsEl) {
-            communicationsEl.classList.remove('comunications--on');
-        }
-    }, 2000);
-};
-
-//TEMPLATES
-
-const LayoutTemplate = 
-        `
-        <div class="app container">
-            <slot name="rendered-components"></slot>
-        </div>
-        <div class="comunications "> 
-        </div>
-        `;
 const charactersContainerTemplate = () => {
-    const characterTemplate: string[] = personajes
-
-        .map((item, index) => {
-            return `
+    const characterTemplate: string[] = personajes.map((item, index) => {
+        return `
                 <li class="character col character-col${index}">
                     <div class="card character__card">
                         <img
@@ -129,73 +88,9 @@ const charactersContainerTemplate = () => {
                     </div>
                     </li>
                 `;
-        });
-        
+    });
+
     return characterTemplate;
 };
 
-const comunicationsTemplate = (char: Personaje) => {
-    const renderedHtmlString = ` 
-            <p class="comunications__text display-1">
-                ${char.comunicate()}
-            </p>
-            <img
-                class="comunications__picture"
-                src="${char.img}"
-                alt="${char.char_name} ${char.char_fam}"
-            />
-        `;
-    return renderedHtmlString;
-};
-
-// ADD LISTENERS FUNCTIONS
-
-function addDeathListeners() {
-    const buttons = document.querySelectorAll('.character__action--death');
-    buttons.forEach((button) => {
-        button.addEventListener('click', handleClickDeath);
-    });
-}
-function addSpeakListeners() {
-    const buttons = document.querySelectorAll('.character__action--speak');
-    buttons.forEach((button) => {
-        button.addEventListener('click', handleClickSpeak);
-    });
-}
-
-// RENDER FUCTIONS
-export function renderLayout() {
-    const root = document.querySelector('slot');
-    if (root) {
-        root.outerHTML = LayoutTemplate;
-    }
-    renderCharactersContainer();
-}
-
-function renderCharactersContainer() {
-    const appContainer = document.querySelector('.app');
-    if (appContainer) {
-        appContainer.innerHTML = 
-        `
-        <ul class="characters-list row list-unstyled">
-            ${charactersContainerTemplate().join('')}     
-        </ul>
-        `
-    }
-    addDeathListeners();
-    addSpeakListeners();
-}
-function renderComunications(char: Personaje) {
-    const comunicationsEl = document.querySelector('.comunications');
-    if (comunicationsEl) {
-        comunicationsEl.innerHTML = comunicationsTemplate(char);
-    }
-}
-
-function renderCharacter(char:number){
-    const characaterColEl=document.querySelector(`.character-col${char}`)
-    if(characaterColEl){
-        // 
-        characaterColEl.outerHTML=charactersContainerTemplate()[char]
-    }
-}
+export { charactersContainerTemplate };
