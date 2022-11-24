@@ -1,3 +1,3 @@
 // START APP
-import { renderLayout } from './main.js';
+import { renderLayout } from './helpers/renders.js';
 renderLayout();

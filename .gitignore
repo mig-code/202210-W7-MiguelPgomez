@@ -87,13 +87,18 @@ web_modules/
 .next
 out
 
-# Nuxt.js build / generate output
-.nuxt
+# Dist exclusion
 dist/scripts
 dist/classes
+dist/helpers
+dist/templates
 dist/*.js
 
 dist/extra
+
+# Nuxt.js build / generate output
+.nuxt
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js

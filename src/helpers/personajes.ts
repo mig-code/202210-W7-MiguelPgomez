@@ -1,7 +1,7 @@
-import { Rey } from './Rey.js';
-import { Luchador } from './Luchador.js';
-import { Asesor } from './Asesor.js';
-import { Escudero } from './Escudero.js';
+import { Rey } from '../classes/Rey.js';
+import { Luchador } from '../classes/Luchador.js';
+import { Asesor } from '../classes/Asesor.js';
+import { Escudero } from '../classes/Escudero.js';
 
 const joffreyBaratheon = new Rey(
     'Joffrey',
