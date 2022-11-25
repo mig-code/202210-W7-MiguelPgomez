@@ -11,15 +11,15 @@ export type PersonajeType = {
     death: () => void;
 };
 export class Personaje {
+    tvShow = 'Game of Thrones';
+    public emoji= '';
     constructor(
         public char_name: string,
         public char_fam: string,
         public char_age: number,
         public img: string,
         public isAlive: boolean = true,
-        public message: string = '',
-        public tvShow: string = 'Game of Thrones',
-        public emoji: string = ''
+        public message: string = ''
     ) {}
     death() {
         this.isAlive = false;

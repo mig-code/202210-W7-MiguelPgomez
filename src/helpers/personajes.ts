@@ -31,9 +31,9 @@ const tyrionLannister = new Asesor(
     'Lannister',
     39,
     'img/tyrion.jpg',
-    'Daenerys'
+    daenerysTargaryen
 );
-const bronn = new Escudero('Bronn', '', 42, 'img/bronn.jpg', 'Jaime', 10);
+const bronn = new Escudero('Bronn', '', 42, 'img/bronn.jpg', jaimeLannister, 10);
 
 export const personajes = [
     joffreyBaratheon,
