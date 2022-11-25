@@ -55,12 +55,12 @@ export const arrayOfCharactersTemplate = () => {
                                 }
                                 ${
                                     item instanceof Asesor
-                                        ? `<li>Asesora a: ${item.advises}</li>`
+                                        ? `<li>Asesora a: ${item.advises.char_name}</li>`
                                         : ''
                                 }
                                 ${
                                     item instanceof Escudero
-                                        ? `<li>Sirve a: ${item.serve}</li>
+                                        ? `<li>Sirve a: ${item.serve.char_name}</li>
                                         <li>Peloteo: ${item.fidelity}</li>`
                                         : ''
                                 }

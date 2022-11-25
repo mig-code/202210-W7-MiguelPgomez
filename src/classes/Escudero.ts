@@ -1,3 +1,4 @@
+import { Luchador } from './Luchador.js';
 import { Personaje } from './Personaje.js';
 export class Escudero extends Personaje {
     constructor(
@@ -5,7 +6,7 @@ export class Escudero extends Personaje {
         char_fam: string,
         char_age: number,
         img: string,
-        public serve: string,
+        public serve: Luchador,
         public fidelity: number
     ) {
         super(char_name, char_fam, char_age, img);
